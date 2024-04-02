@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Team7Final.Views.TaskItemPage"
+             BackgroundColor="#E4E4E4"
+             Title="{Binding Name}">
+
+    <ContentPage.Content>
+        <StackLayout Margin="20"
+         VerticalOptions="StartAndExpand">
+            <Label Text="Name" />
+            <Entry Text="{Binding Name}" />
+            <Label Text="Notes" />
+            <Entry Text="{Binding Notes}" />
+            <Label Text="Done" />
+            <Switch IsToggled="{Binding Done}" />
+            <Button Text="Save" Clicked="SaveClicked" BackgroundColor="#1683FF" />
+            <Button Text="Delete" Clicked="DeleteClicked" BackgroundColor="#FF4B4B" />
+            <Button Text="Cancel" Clicked="CancelClicked" BackgroundColor="#FFFFFF" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

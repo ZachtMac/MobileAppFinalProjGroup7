@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\MobileAppFinalProjGroup7\\Team7Final\\Team7Final\\Team7Final\\Team7Final.csproj": {}
+    "C:\\repos\\MobileAppFinalProjGroup7\\Team7Final\\Team7Final\\Team7Final.csproj": {}
   },
   "projects": {
-    "E:\\MobileAppFinalProjGroup7\\Team7Final\\Team7Final\\Team7Final\\Team7Final.csproj": {
+    "C:\\repos\\MobileAppFinalProjGroup7\\Team7Final\\Team7Final\\Team7Final.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\MobileAppFinalProjGroup7\\Team7Final\\Team7Final\\Team7Final\\Team7Final.csproj",
+        "projectUniqueName": "C:\\repos\\MobileAppFinalProjGroup7\\Team7Final\\Team7Final\\Team7Final.csproj",
         "projectName": "Team7Final",
-        "projectPath": "E:\\MobileAppFinalProjGroup7\\Team7Final\\Team7Final\\Team7Final\\Team7Final.csproj",
-        "packagesPath": "C:\\Users\\zacha\\.nuget\\packages\\",
-        "outputPath": "E:\\MobileAppFinalProjGroup7\\Team7Final\\Team7Final\\Team7Final\\obj\\",
+        "projectPath": "C:\\repos\\MobileAppFinalProjGroup7\\Team7Final\\Team7Final\\Team7Final.csproj",
+        "packagesPath": "C:\\Users\\vtspo\\.nuget\\packages\\",
+        "outputPath": "C:\\repos\\MobileAppFinalProjGroup7\\Team7Final\\Team7Final\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\zacha\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\vtspo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -75,7 +75,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

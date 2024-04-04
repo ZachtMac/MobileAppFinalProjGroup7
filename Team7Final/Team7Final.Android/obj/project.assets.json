@@ -4536,24 +4536,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\zacha\\.nuget\\packages\\": {},
+    "C:\\Users\\vtspo\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\MobileAppFinalProjGroup7\\Team7Final\\Team7Final\\Team7Final.Android\\Team7Final.Android.csproj",
+      "projectUniqueName": "C:\\repos\\MobileAppFinalProjGroup7\\Team7Final\\Team7Final.Android\\Team7Final.Android.csproj",
       "projectName": "Team7Final.Android",
-      "projectPath": "E:\\MobileAppFinalProjGroup7\\Team7Final\\Team7Final\\Team7Final.Android\\Team7Final.Android.csproj",
-      "packagesPath": "C:\\Users\\zacha\\.nuget\\packages\\",
-      "outputPath": "E:\\MobileAppFinalProjGroup7\\Team7Final\\Team7Final\\Team7Final.Android\\obj\\",
+      "projectPath": "C:\\repos\\MobileAppFinalProjGroup7\\Team7Final\\Team7Final.Android\\Team7Final.Android.csproj",
+      "packagesPath": "C:\\Users\\vtspo\\.nuget\\packages\\",
+      "outputPath": "C:\\repos\\MobileAppFinalProjGroup7\\Team7Final\\Team7Final.Android\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\zacha\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\vtspo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4567,8 +4567,8 @@
       "frameworks": {
         "monoandroid13.0": {
           "projectReferences": {
-            "E:\\MobileAppFinalProjGroup7\\Team7Final\\Team7Final\\Team7Final\\Team7Final.csproj": {
-              "projectPath": "E:\\MobileAppFinalProjGroup7\\Team7Final\\Team7Final\\Team7Final\\Team7Final.csproj"
+            "C:\\repos\\MobileAppFinalProjGroup7\\Team7Final\\Team7Final\\Team7Final.csproj": {
+              "projectPath": "C:\\repos\\MobileAppFinalProjGroup7\\Team7Final\\Team7Final\\Team7Final.csproj"
             }
           }
         }

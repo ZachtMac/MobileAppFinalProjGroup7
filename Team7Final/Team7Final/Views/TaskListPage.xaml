@@ -38,9 +38,8 @@
                                VerticalTextAlignment="Center"
                                
                                FontSize="25" />
-                            <Image Source="check.png"
-                               HorizontalOptions="End"
-                               IsVisible="{Binding Done}" />
+                            <CheckBox HorizontalOptions="End"
+                                      IsChecked="{Binding Done}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

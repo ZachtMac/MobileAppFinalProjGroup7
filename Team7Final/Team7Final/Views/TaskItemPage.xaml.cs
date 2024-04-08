@@ -15,6 +15,13 @@ namespace Team7Final.Views
         async void SaveClicked(object sender, EventArgs e)
         {
             var TaskItem = (TaskItem)BindingContext;
+
+            if(TaskItem.Name.Trim() == "")
+            {
+                await DisplayAlert("Notice", "Please name your task", "Ok");
+                return;
+            }
+
             TaskItemDatabase database = await TaskItemDatabase.Instance;
             await database.SaveItemAsync(TaskItem);
             await Navigation.PopAsync();

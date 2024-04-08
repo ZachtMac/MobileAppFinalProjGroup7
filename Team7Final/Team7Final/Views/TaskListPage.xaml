@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Team7Final.Views.TaskListPage"         BackgroundColor="#E4E4E4"
+             x:Class="Team7Final.Views.TaskListPage" BackgroundColor="#E4E4E4"
          Title="To-do">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="New Item" Clicked="OnItemAdded">
@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
 
         <StackLayout Grid.Row="0" Orientation="Horizontal" Margin="20,10">
-            <Label Text="Show Incomplete Items" VerticalOptions="Center" />
+            <Label Text="Incomplete Only" VerticalOptions="Center" />
             <Switch x:Name="toggleSwitch" Toggled="OnToggleSwitchToggled" />
         </StackLayout>
 

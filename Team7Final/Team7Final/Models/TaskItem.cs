@@ -18,10 +18,7 @@ namespace Team7Final.Models
         private string name;
         public string Name
         {
-            get
-            {
-                return name;
-            }
+            get => name;
             set
             {
                 name = value;
@@ -32,10 +29,7 @@ namespace Team7Final.Models
         private string notes;
         public string Notes
         {
-            get
-            {
-                return notes;
-            }
+            get => notes;
             set
             {
                 notes = value;
@@ -43,13 +37,11 @@ namespace Team7Final.Models
             }
         }
 
+
         private DateTime date;
         public DateTime Date 
         {
-            get 
-            {
-                return date;
-            }
+            get => date;
             set 
             {
                 date = value;
@@ -59,11 +51,8 @@ namespace Team7Final.Models
         
         private bool done;
         public bool Done 
-        { 
-            get 
-            { 
-                return done; 
-            }
+        {
+            get => done;
             set 
             { 
                 done = value;
@@ -77,7 +66,6 @@ namespace Team7Final.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-            //Code to update database v
             TaskItemDatabase database = await TaskItemDatabase.Instance;
             await database.SaveItemAsync(this);
         }

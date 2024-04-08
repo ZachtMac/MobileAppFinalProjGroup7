@@ -65,9 +65,6 @@ namespace Team7Final.Models
         protected async virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-            TaskItemDatabase database = await TaskItemDatabase.Instance;
-            await database.SaveItemAsync(this);
         }
     }
     

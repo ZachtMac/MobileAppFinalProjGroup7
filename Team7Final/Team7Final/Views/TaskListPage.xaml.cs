@@ -58,5 +58,14 @@ namespace Team7Final.Views
                 listView.ItemsSource = await database.GetItemsAsync();
             }
         }
+
+        private async void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            var checkBox = (CheckBox)sender;
+            var taskItem = (TaskItem)checkBox.BindingContext;
+            TaskItemDatabase taskItemDatabase = await TaskItemDatabase.Instance;
+            await taskItemDatabase.SaveItemAsync(taskItem);
+            await Navigation.PopAsync();
+        }
     }
 }

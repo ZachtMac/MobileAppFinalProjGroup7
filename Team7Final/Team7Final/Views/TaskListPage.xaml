@@ -39,7 +39,8 @@
                                
                                FontSize="25" />
                             <CheckBox HorizontalOptions="End"
-                                      IsChecked="{Binding Done}" />
+                                      IsChecked="{Binding Done}"
+                                      CheckedChanged="CheckBox_CheckedChanged"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

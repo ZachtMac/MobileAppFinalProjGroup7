@@ -16,7 +16,7 @@ namespace Team7Final.Views
         {
             var TaskItem = (TaskItem)BindingContext;
 
-            if(TaskItem.Name.Trim() == "")
+            if(TaskItem.Name == null || TaskItem.Name.Trim() == string.Empty)
             {
                 await DisplayAlert("Notice", "Please name your task", "Ok");
                 return;

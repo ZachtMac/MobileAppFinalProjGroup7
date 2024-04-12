@@ -14,9 +14,9 @@
             <Entry Text="{Binding Notes}" />
             <Label Text="Done" />
             <Switch IsToggled="{Binding Done}" />
-            <Button Text="Save" Clicked="SaveClicked" BackgroundColor="#1683FF" />
-            <Button Text="Delete" Clicked="DeleteClicked" BackgroundColor="#FF4B4B" />
-            <Button Text="Cancel" Clicked="CancelClicked" BackgroundColor="#FFFFFF" />
+            <Button Text="Save" Clicked="SaveClicked" Style="{StaticResource primaryBtn}" />
+            <Button Text="Delete" Clicked="DeleteClicked" Style="{StaticResource dangerBtn}" />
+            <Button Text="Cancel" Clicked="CancelClicked" Style="{StaticResource secondaryBtn}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

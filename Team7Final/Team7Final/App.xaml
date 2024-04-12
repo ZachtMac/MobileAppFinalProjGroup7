@@ -4,8 +4,26 @@
              x:Class="Team7Final.App">
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="primaryColor">#89897b</Color>
-            <Color x:Key="primaryDarkGreen">#505144</Color>
+            <Color x:Key="primaryColor">#0091EA</Color>
+            <Color x:Key="secondaryColor">#0097A7</Color>
+            <Color x:Key="dangerColor">#F44336</Color>
+            <Color x:Key="whiteColor">#efefef</Color>
+            <Style x:Key="btnBase" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource secondaryColor}" />
+                <Setter Property="TextColor" Value="{StaticResource whiteColor}" />
+            </Style>
+            <Style x:Key="primaryBtn" BasedOn="{StaticResource btnBase}" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource primaryColor}" />
+                <Setter Property="TextColor" Value="{StaticResource whiteColor}" />
+            </Style>
+            <Style x:Key="secondaryBtn" BasedOn="{StaticResource btnBase}" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource secondaryColor}" />
+                <Setter Property="TextColor" Value="{StaticResource whiteColor}" />
+            </Style>
+            <Style x:Key="dangerBtn" BasedOn="{StaticResource btnBase}" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource dangerColor}" />
+                <Setter Property="TextColor" Value="{StaticResource whiteColor}" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,14 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Team7Final.Views.TaskListPage" BackgroundColor="#E4E4E4"
-         Title="To-do">
+             xmlns:viewModel="clr-namespace:Team7Final.ViewModels" xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="Team7Final.Views.TaskListPage"
+             BackgroundColor="#E4E4E4"
+             Title="To-do">
+
+    <ContentPage.Resources>
+        <viewModel:TaskListViewModel x:Key="ViewModelInstance" />
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <viewModel:TaskListViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="New Item" Clicked="OnItemAdded">
+        <ToolbarItem Text="New Item" Command="{Binding AddTaskCommand}">
             <ToolbarItem.IconImageSource>
                 <OnPlatform x:TypeArguments="ImageSource">
                     <On Platform="Android, UWP"
-                    Value="plus.png" />
+                        Value="plus.png" />
                 </OnPlatform>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
@@ -22,25 +31,22 @@
 
         <StackLayout Grid.Row="0" Orientation="Horizontal" Margin="20,10">
             <Label Text="Incomplete Only" VerticalOptions="Center" />
-            <Switch x:Name="toggleSwitch" Toggled="OnToggleSwitchToggled" />
+            <Switch x:Name="toggleSwitch" IsToggled="{Binding IsToggleSwitchOn}" />
         </StackLayout>
 
-        <ListView x:Name="listView" Grid.Row="1" Margin="20" ItemSelected="OnListItemSelected">
+        <ListView x:Name="listView" Grid.Row="1" Margin="20" ItemsSource="{Binding TaskItems}" ItemSelected="OnItemSelectedChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Margin="30,0,0,0"
-                                 Orientation="Horizontal"
-                                 HorizontalOptions="FillAndExpand">
+                                     Orientation="Horizontal"
+                                     HorizontalOptions="FillAndExpand">
                             <Label Text="{Binding Name}"
-                               HorizontalOptions="StartAndExpand"
-                               
-                               VerticalTextAlignment="Center"
-                               
-                               FontSize="25" />
-                            <CheckBox HorizontalOptions="End"
-                                      IsChecked="{Binding Done}"
-                                      CheckedChanged="CheckBox_CheckedChanged"/>
+                                   HorizontalOptions="StartAndExpand"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="25" />
+                            <CheckBox HorizontalOptions="End">
+                            </CheckBox>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

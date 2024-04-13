@@ -19,6 +19,7 @@ namespace Team7Final
             get
             {
                 var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                Console.WriteLine(Path.Combine(basePath, DatabaseFilename));
                 return Path.Combine(basePath, DatabaseFilename);
             }
         }

@@ -7,65 +7,28 @@ using Team7Final.Models;
 using Team7Final.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Team7Final.ViewModels;
 
 namespace Team7Final.Views
 {
     public partial class TaskListPage : ContentPage
     {
-        public TaskListPage()
+        private TaskListViewModel _taskListViewModel = new TaskListViewModel();
+        public TaskListPage(TaskListViewModel taskListViewModel)
         {
             InitializeComponent();
+            BindingContext = _taskListViewModel;
         }
 
-        protected override async void OnAppearing()
+        public void OnItemSelectedChanged(object sender, SelectedItemChangedEventArgs e)
+        {
+            _taskListViewModel?.ItemSelectedCommand?.Execute(e.SelectedItem);
+        }
+
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            TaskItemDatabase database = await TaskItemDatabase.Instance;
-            listView.ItemsSource = await database.GetItemsAsync();
-        }
-
-        async void OnItemAdded(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new TaskItemPage
-            {
-                BindingContext = new TaskItem()
-            });
-        }
-
-        async void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            if (e.SelectedItem != null)
-            {
-                await Navigation.PushAsync(new TaskItemPage
-                {
-                    BindingContext = e.SelectedItem as TaskItem
-                });
-            }
-        }
-
-        private async void OnToggleSwitchToggled(object sender, ToggledEventArgs e)
-        {
-            if (e.Value)
-            {
-                TaskItemDatabase database = await TaskItemDatabase.Instance;
-                listView.ItemsSource = await database.GetItemsAsync();
-                listView.ItemsSource = listView.ItemsSource.Cast<TaskItem>().Where(item => !item.Done).ToList();
-            }
-            else
-            {
-                TaskItemDatabase database = await TaskItemDatabase.Instance;
-                listView.ItemsSource = await database.GetItemsAsync();
-            }
-        }
-
-        private async void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
-        {
-            var checkBox = (CheckBox)sender;
-            var taskItem = (TaskItem)checkBox.BindingContext;
-            TaskItemDatabase taskItemDatabase = await TaskItemDatabase.Instance;
-            await taskItemDatabase.SaveItemAsync(taskItem);
-            await Navigation.PopAsync();
+            _taskListViewModel.LoadItemsAsync();
         }
     }
 }

@@ -1,22 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:Team7Final.ViewModels"
              x:Class="Team7Final.Views.TaskItemPage"
              BackgroundColor="#E4E4E4"
-             Title="{Binding Name}">
+             Title="{Binding TaskItem.Name}">
+
+    <ContentPage.BindingContext>
+        <viewModel:TaskItemViewModel />
+    </ContentPage.BindingContext>
 
     <ContentPage.Content>
         <StackLayout Margin="20"
-         VerticalOptions="StartAndExpand">
+                     VerticalOptions="StartAndExpand">
             <Label Text="Name" />
-            <Entry Text="{Binding Name}" />
+            <Entry Text="{Binding TaskItem.Name}" />
             <Label Text="Notes" />
-            <Entry Text="{Binding Notes}" />
+            <Entry Text="{Binding TaskItem.Notes}" />
             <Label Text="Done" />
-            <Switch IsToggled="{Binding Done}" />
-            <Button Text="Save" Clicked="SaveClicked" Style="{StaticResource primaryBtn}" />
-            <Button Text="Delete" Clicked="DeleteClicked" Style="{StaticResource dangerBtn}" />
-            <Button Text="Cancel" Clicked="CancelClicked" Style="{StaticResource secondaryBtn}" />
+            <Switch IsToggled="{Binding TaskItem.Done}" />
+            <Button Text="Save" Command="{Binding SaveCommand}"  Style="{StaticResource primaryBtn}" />
+            <Button Text="Delete" Command="{Binding DeleteCommand}" Style="{StaticResource dangerBtn}" />
+            <Button Text="Cancel" Command="{Binding CancelCommand}" Style="{StaticResource secondaryBtn}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

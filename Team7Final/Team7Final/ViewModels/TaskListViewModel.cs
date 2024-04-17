@@ -56,9 +56,9 @@ namespace Team7Final.ViewModels
             AddTaskCommand = new Command(async () => await AddTask());
             ItemSelectedCommand = new Command<TaskItem>(async (taskItem) => await SelectTask(taskItem));
             CheckBoxChangedCommand = new Command<CheckedChangedEventArgs>(async (args) => await CheckBoxChanged(capturedSender, args));
-            ItemCheckChangeCommand = new Command<CheckedChangedEventArgs>(async (args) =>
+            ItemCheckChangeCommand = new Command<CheckBox>(async (checkBox) =>
             {
-                await ItemCheckChanged(capturedSender, args);
+                await ItemCheckChanged(capturedSender, checkBox);
             });
             _ = LoadItemsAsync();
         }
@@ -125,17 +125,17 @@ namespace Team7Final.ViewModels
             }
         }
 
-        private async Task ItemCheckChanged(object sender, CheckedChangedEventArgs args)
+        private async Task ItemCheckChanged(object sender, CheckBox checkBox)
         {
-            var checkBox = (CheckBox)sender;
-            var taskItem = (TaskItem)checkBox.BindingContext;
+            //var checkBox = (CheckBox)sender;
+            /*var taskItem = (TaskItem)checkBox.BindingContext;
             taskItem.Done = checkBox.IsChecked;
 
             if (taskItem != null)
             {
                 TaskItemDatabase database = await TaskItemDatabase.Instance;
                 await database.SaveItemAsync(taskItem);
-            }
+            }*/
         }
 
         //protected async virtual void OnPropertyChanged(string propertyName)

@@ -20,24 +20,24 @@ namespace Team7Final.ViewModels
         private ObservableCollection<TaskItem> _taskItems;
         public ObservableCollection<TaskItem> TaskItems
         {
-            get { return _taskItems; }
+            get => _taskItems;
             set
             {
                 _taskItems = value;
                 OnPropertyChanged();
-                LoadItemsAsync();
+                //_ = LoadItemsAsync();
             }
         }
 
-        private bool _isToggleSwitchOn;
+        private bool _isToggleSwitchOn = false;
         public bool IsToggleSwitchOn
         {
-            get { return _isToggleSwitchOn; }
+            get => _isToggleSwitchOn;
             set
             {
                 if (SetProperty(ref _isToggleSwitchOn, value))
                 {
-                    ToggleSwitch(value);
+                    _ = ToggleSwitch(value);
                 }
             }
         }
@@ -47,6 +47,7 @@ namespace Team7Final.ViewModels
         public ICommand AddTaskCommand { get; }
         public ICommand ItemSelectedCommand { get; }
         public ICommand CheckBoxChangedCommand { get; }
+        public ICommand ItemCheckChangeCommand { get; }
 
         public TaskListViewModel()
         {
@@ -55,7 +56,10 @@ namespace Team7Final.ViewModels
             AddTaskCommand = new Command(async () => await AddTask());
             ItemSelectedCommand = new Command<TaskItem>(async (taskItem) => await SelectTask(taskItem));
             CheckBoxChangedCommand = new Command<CheckedChangedEventArgs>(async (args) => await CheckBoxChanged(capturedSender, args));
-            IsToggleSwitchOn = false;
+            ItemCheckChangeCommand = new Command<CheckedChangedEventArgs>(async (args) =>
+            {
+                await ItemCheckChanged(capturedSender, args);
+            });
             _ = LoadItemsAsync();
         }
 
@@ -121,9 +125,23 @@ namespace Team7Final.ViewModels
             }
         }
 
+        private async Task ItemCheckChanged(object sender, CheckedChangedEventArgs args)
+        {
+            var checkBox = (CheckBox)sender;
+            var taskItem = (TaskItem)checkBox.BindingContext;
+            taskItem.Done = checkBox.IsChecked;
+
+            if (taskItem != null)
+            {
+                TaskItemDatabase database = await TaskItemDatabase.Instance;
+                await database.SaveItemAsync(taskItem);
+            }
+        }
+
         //protected async virtual void OnPropertyChanged(string propertyName)
         //{
         //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         //}
+
     }
 }

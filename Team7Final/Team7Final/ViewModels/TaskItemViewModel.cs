@@ -15,7 +15,7 @@ namespace Team7Final.ViewModels
         private TaskItem _taskItem;
         public TaskItem TaskItem
         {
-            get { return _taskItem; }
+            get => _taskItem;
             set { SetProperty(ref _taskItem, value); }
         }
 

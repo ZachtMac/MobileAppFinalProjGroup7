@@ -45,7 +45,7 @@
                                    HorizontalOptions="StartAndExpand"
                                    VerticalTextAlignment="Center"
                                    FontSize="25" />
-                            <CheckBox HorizontalOptions="End">
+                            <CheckBox IsChecked="{Binding Done}" CheckedChanged="OnItemCheckChange" HorizontalOptions="End">
                             </CheckBox>
                         </StackLayout>
                     </ViewCell>

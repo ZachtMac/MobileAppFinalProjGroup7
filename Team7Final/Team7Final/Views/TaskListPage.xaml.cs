@@ -28,7 +28,12 @@ namespace Team7Final.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            _taskListViewModel.LoadItemsAsync();
+            _ = _taskListViewModel.LoadItemsAsync();
+        }
+
+        public void OnItemCheckChange(object sender, Xamarin.Forms.CheckedChangedEventArgs e)
+        {
+            _taskListViewModel?.ItemCheckChangeCommand?.Execute(e);
         }
     }
 }

@@ -31,9 +31,12 @@ namespace Team7Final.Views
             _ = _taskListViewModel.LoadItemsAsync();
         }
 
-        public void OnItemCheckChange(object sender, Xamarin.Forms.CheckedChangedEventArgs e)
+        public void OnItemCheckChange(object sender, CheckedChangedEventArgs e)
         {
-            _taskListViewModel?.ItemCheckChangeCommand?.Execute(e);
+            if (sender is CheckBox checkBox && BindingContext is TaskListViewModel viewModel)
+            {
+                viewModel.ItemCheckChangeCommand.Execute(checkBox);
+            }
         }
     }
 }

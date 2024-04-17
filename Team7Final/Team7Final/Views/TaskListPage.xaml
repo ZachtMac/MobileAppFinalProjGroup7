@@ -4,7 +4,7 @@
              xmlns:viewModel="clr-namespace:Team7Final.ViewModels" xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Class="Team7Final.Views.TaskListPage"
              BackgroundColor="#E4E4E4"
-             Title="To-do">
+             Title="Scheduler">
 
     <ContentPage.Resources>
         <viewModel:TaskListViewModel x:Key="ViewModelInstance" />
@@ -41,7 +41,7 @@
                         <StackLayout Margin="30,0,0,0"
                                      Orientation="Horizontal"
                                      HorizontalOptions="FillAndExpand">
-                            <Label Text="{Binding Name}"
+                            <Label Text="{Binding Label}"
                                    HorizontalOptions="StartAndExpand"
                                    VerticalTextAlignment="Center"
                                    FontSize="25" />

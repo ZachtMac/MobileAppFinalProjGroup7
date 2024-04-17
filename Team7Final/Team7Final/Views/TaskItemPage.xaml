@@ -19,6 +19,8 @@
             <Entry Text="{Binding TaskItem.Notes}" />
             <Label Text="Done" />
             <Switch IsToggled="{Binding TaskItem.Done}" />
+            <Label Text="Date" />
+            <DatePicker Date="{Binding TaskItem.Date}" />
             <Button Text="Save" Command="{Binding SaveCommand}"  Style="{StaticResource primaryBtn}" />
             <Button Text="Delete" Command="{Binding DeleteCommand}" Style="{StaticResource dangerBtn}" />
             <Button Text="Cancel" Command="{Binding CancelCommand}" Style="{StaticResource secondaryBtn}" />

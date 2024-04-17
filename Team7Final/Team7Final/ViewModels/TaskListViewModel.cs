@@ -127,15 +127,14 @@ namespace Team7Final.ViewModels
 
         private async Task ItemCheckChanged(object sender, CheckBox checkBox)
         {
-            //var checkBox = (CheckBox)sender;
-            /*var taskItem = (TaskItem)checkBox.BindingContext;
-            taskItem.Done = checkBox.IsChecked;
-
+            var taskItem = (TaskItem)checkBox.BindingContext;
             if (taskItem != null)
             {
+                taskItem.Done = checkBox.IsChecked;
                 TaskItemDatabase database = await TaskItemDatabase.Instance;
+                if (database == null) return;
                 await database.SaveItemAsync(taskItem);
-            }*/
+            }
         }
 
         //protected async virtual void OnPropertyChanged(string propertyName)

@@ -71,6 +71,8 @@ namespace Team7Final.ViewModels
             {
                 GroupedTaskItems.Add(itemGroup);
             }
+
+            SetItemColors();
         }
 
         private async Task AddTask()
@@ -101,22 +103,32 @@ namespace Team7Final.ViewModels
                 .OrderBy(g => g.Key);
 
             GroupedTaskItems.Clear();
-            if (value)
+            foreach (var itemGroup in groupedItems)
             {
-                foreach (var itemGroup in groupedItems)
-                {
-                    var incompleteItems = itemGroup.Where(item => !item.Done && item.Date < DateTime.Today);
-                    if (incompleteItems.Any())
-                    {
-                        GroupedTaskItems.Add(new Grouping<DateTime, TaskItem>(itemGroup.Key, incompleteItems));
-                    }
-                }
+                GroupedTaskItems.Add(itemGroup);
             }
-            else
+
+            SetItemColors();
+        }
+
+        private void SetItemColors()
+        {
+            foreach (var itemGroup in GroupedTaskItems)
             {
-                foreach (var itemGroup in groupedItems)
+                foreach (var taskItem in itemGroup)
                 {
-                    GroupedTaskItems.Add(itemGroup);
+                    if (taskItem.Done)
+                    {
+                        taskItem.TextColor = Color.Green;
+                    }
+                    else if (taskItem.Date <= DateTime.Today)
+                    {
+                        taskItem.TextColor = Color.Red;
+                    }
+                    else
+                    {
+                        taskItem.TextColor = Color.Black;
+                    }
                 }
             }
         }
@@ -127,9 +139,11 @@ namespace Team7Final.ViewModels
             var taskItem = (TaskItem)checkBox.BindingContext;
 
             if (taskItem != null)
-            {
-                TaskItemDatabase database = await TaskItemDatabase.Instance;
-                await database.SaveItemAsync(taskItem);
+                {
+                    taskItem.Done = checkBox.IsChecked;
+                    taskItem.TextColor = taskItem.Done ? Color.Green : Color.Black;
+                    TaskItemDatabase database = await TaskItemDatabase.Instance;
+                    await database.SaveItemAsync(taskItem);
             }
         }
 

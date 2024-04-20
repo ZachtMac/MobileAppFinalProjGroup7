@@ -62,6 +62,8 @@ namespace Team7Final.Models
             } 
         }
 
+        public Color TextColor { get; internal set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected async virtual void OnPropertyChanged(string propertyName)

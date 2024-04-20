@@ -38,6 +38,25 @@ namespace Team7Final.ViewModels
             }
         }
 
+        private TaskItem _selectedTaskItem;
+        public TaskItem SelectedTaskItem
+        {
+            get => _selectedTaskItem;
+            set
+            {
+                if (_selectedTaskItem != value)
+                {
+                    _selectedTaskItem = value;
+                    OnPropertyChanged();
+                    if (_selectedTaskItem != null)
+                    {
+                        SelectTask(_selectedTaskItem);
+                    }
+                }
+            }
+        }
+
+
         public ICommand AddTaskCommand { get; }
         public ICommand ItemSelectedCommand { get; }
         public ICommand CheckBoxChangedCommand { get; }
@@ -114,7 +133,7 @@ namespace Team7Final.ViewModels
         private void SetItemColors()
         {
             // Considered "late" at 23:59:59
-            var endOfToday = DateTime.Today.AddDays(1).AddSeconds(-1);
+            var endOfToday = DateTime.Today.AddSeconds(-1);
             foreach (var itemGroup in GroupedTaskItems)
             {
                 foreach (var taskItem in itemGroup)

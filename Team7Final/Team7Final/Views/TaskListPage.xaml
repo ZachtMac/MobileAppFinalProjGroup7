@@ -4,7 +4,7 @@
              xmlns:viewModel="clr-namespace:Team7Final.ViewModels" xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Class="Team7Final.Views.TaskListPage"
              BackgroundColor="#E4E4E4"
-             Title="Scheduler">
+             Title="TaskAccomplish">
 
     <ContentPage.Resources>
         <viewModel:TaskListViewModel x:Key="ViewModelInstance" />

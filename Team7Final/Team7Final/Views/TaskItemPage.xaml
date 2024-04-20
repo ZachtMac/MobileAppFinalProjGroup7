@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModel="clr-namespace:Team7Final.ViewModels"
              x:Class="Team7Final.Views.TaskItemPage"
-             BackgroundColor="#E4E4E4"
+             BackgroundColor="{x:StaticResource lightGray2}"
              Title="{Binding TaskItem.Name}">
 
     <ContentPage.BindingContext>

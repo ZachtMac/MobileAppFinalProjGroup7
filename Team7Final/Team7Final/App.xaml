@@ -8,6 +8,8 @@
             <Color x:Key="secondaryColor">#0097A7</Color>
             <Color x:Key="dangerColor">#F44336</Color>
             <Color x:Key="whiteColor">#efefef</Color>
+            <Color x:Key="lightGray1">#d3d3d3</Color>
+            <Color x:Key="lightGray2">#e4e4e4</Color>
             <Style x:Key="btnBase" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource secondaryColor}" />
                 <Setter Property="TextColor" Value="{StaticResource whiteColor}" />

@@ -15,8 +15,6 @@ namespace Team7Final.Models
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
 
-        public string Label => $"{Date.DayOfWeek} - {Name}";
-
         private string name;
         public string Name
         {

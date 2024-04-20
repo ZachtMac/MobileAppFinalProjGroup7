@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModel="clr-namespace:Team7Final.ViewModels" xmlns:xct="http://xamarin.com/schemas/2020/toolkit" xmlns:x1="clr-namespace:System;assembly=netstandard"
              x:Class="Team7Final.Views.TaskListPage"
-             BackgroundColor="#E4E4E4"
+             BackgroundColor="{x:StaticResource lightGray2}"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              Title="TaskAccomplish">
 
@@ -28,8 +28,8 @@
         <ListView.GroupHeaderTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <StackLayout BackgroundColor="#D3D3D3">
-                        <Label Text="{Binding Key, StringFormat='{0:MMMM dd, yyyy}'}" FontAttributes="Bold" Margin="10"/>
+                    <StackLayout BackgroundColor="{x:StaticResource lightGray1}">
+                        <Label Text="{Binding Key, StringFormat='{0:MMMM dd, yyyy - ddd}'}" FontAttributes="Bold" Margin="10"/>
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>
@@ -38,13 +38,13 @@
             <DataTemplate>
                 <ViewCell>
                     <StackLayout Margin="30,0,0,0"
-                 Orientation="Horizontal"
-                 HorizontalOptions="FillAndExpand">
-                        <Label Text="{Binding Label}"
-               HorizontalOptions="StartAndExpand"
-               VerticalTextAlignment="Center"
-               FontSize="25"
-               TextColor="{Binding TextColor}">
+                        Orientation="Horizontal"
+                        HorizontalOptions="FillAndExpand">
+                        <Label Text="{Binding Name}"
+                            HorizontalOptions="StartAndExpand"
+                            VerticalTextAlignment="Center"
+                            FontSize="25"
+                            TextColor="{Binding TextColor}">
                         </Label>
                         <CheckBox IsChecked="{Binding Done}" CheckedChanged="OnItemCheckChange" HorizontalOptions="End">
                         </CheckBox>

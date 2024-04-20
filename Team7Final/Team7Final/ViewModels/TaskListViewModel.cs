@@ -1,31 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Team7Final.Data;
 using Team7Final.Models;
 using Team7Final.Views;
+using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
-using System.Linq;
-using System.Windows.Input;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace Team7Final.ViewModels
 {
     public class TaskListViewModel : BaseViewModel
     {
-
-        private ObservableCollection<TaskItem> _taskItems;
-        public ObservableCollection<TaskItem> TaskItems
+        private ObservableCollection<Grouping<DateTime, TaskItem>> _groupedTaskItems;
+        public ObservableCollection<Grouping<DateTime, TaskItem>> GroupedTaskItems
         {
-            get => _taskItems;
+            get => _groupedTaskItems;
             set
             {
-                _taskItems = value;
+                _groupedTaskItems = value;
                 OnPropertyChanged();
-                //_ = LoadItemsAsync();
             }
         }
 
@@ -42,8 +38,6 @@ namespace Team7Final.ViewModels
             }
         }
 
-
-
         public ICommand AddTaskCommand { get; }
         public ICommand ItemSelectedCommand { get; }
         public ICommand CheckBoxChangedCommand { get; }
@@ -52,7 +46,7 @@ namespace Team7Final.ViewModels
         public TaskListViewModel()
         {
             var capturedSender = this;
-            TaskItems = new ObservableCollection<TaskItem>();
+            GroupedTaskItems = new ObservableCollection<Grouping<DateTime, TaskItem>>();
             AddTaskCommand = new Command(async () => await AddTask());
             ItemSelectedCommand = new Command<TaskItem>(async (taskItem) => await SelectTask(taskItem));
             CheckBoxChangedCommand = new Command<CheckedChangedEventArgs>(async (args) => await CheckBoxChanged(capturedSender, args));
@@ -67,11 +61,18 @@ namespace Team7Final.ViewModels
         {
             TaskItemDatabase database = await TaskItemDatabase.Instance;
             var items = await database.GetItemsAsync();
-            TaskItems.Clear();
-            foreach (var item in items)
+            var groupedItems = items
+                .GroupBy(x => x.Date.Date)
+                .Select(group => new Grouping<DateTime, TaskItem>(group.Key, group))
+                .OrderBy(g => g.Key);
+
+            GroupedTaskItems.Clear();
+            foreach (var itemGroup in groupedItems)
             {
-                TaskItems.Add(item);
+                GroupedTaskItems.Add(itemGroup);
             }
+
+            SetItemColors();
         }
 
         private async Task AddTask()
@@ -96,19 +97,38 @@ namespace Team7Final.ViewModels
         {
             TaskItemDatabase database = await TaskItemDatabase.Instance;
             var items = await database.GetItemsAsync();
-            TaskItems.Clear();
-            if (value)
+            var groupedItems = items
+                .GroupBy(x => x.Date.Date)
+                .Select(group => new Grouping<DateTime, TaskItem>(group.Key, group))
+                .OrderBy(g => g.Key);
+
+            GroupedTaskItems.Clear();
+            foreach (var itemGroup in groupedItems)
             {
-                foreach (var item in items.Where(item => !item.Done))
-                {
-                    TaskItems.Add(item);
-                }
+                GroupedTaskItems.Add(itemGroup);
             }
-            else
+
+            SetItemColors();
+        }
+
+        private void SetItemColors()
+        {
+            foreach (var itemGroup in GroupedTaskItems)
             {
-                foreach (var item in items)
+                foreach (var taskItem in itemGroup)
                 {
-                    TaskItems.Add(item);
+                    if (taskItem.Done)
+                    {
+                        taskItem.TextColor = Color.Green;
+                    }
+                    else if (taskItem.Date <= DateTime.Today)
+                    {
+                        taskItem.TextColor = Color.Red;
+                    }
+                    else
+                    {
+                        taskItem.TextColor = Color.Black;
+                    }
                 }
             }
         }
@@ -119,9 +139,11 @@ namespace Team7Final.ViewModels
             var taskItem = (TaskItem)checkBox.BindingContext;
 
             if (taskItem != null)
-            {
-                TaskItemDatabase database = await TaskItemDatabase.Instance;
-                await database.SaveItemAsync(taskItem);
+                {
+                    taskItem.Done = checkBox.IsChecked;
+                    taskItem.TextColor = taskItem.Done ? Color.Green : Color.Black;
+                    TaskItemDatabase database = await TaskItemDatabase.Instance;
+                    await database.SaveItemAsync(taskItem);
             }
         }
 
@@ -136,11 +158,5 @@ namespace Team7Final.ViewModels
                 await database.SaveItemAsync(taskItem);
             }
         }
-
-        //protected async virtual void OnPropertyChanged(string propertyName)
-        //{
-        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        //}
-
     }
 }

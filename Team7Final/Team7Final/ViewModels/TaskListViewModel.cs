@@ -113,6 +113,8 @@ namespace Team7Final.ViewModels
 
         private void SetItemColors()
         {
+            // Considered "late" at 23:59:59
+            var endOfToday = DateTime.Today.AddDays(1).AddSeconds(-1);
             foreach (var itemGroup in GroupedTaskItems)
             {
                 foreach (var taskItem in itemGroup)
@@ -121,7 +123,7 @@ namespace Team7Final.ViewModels
                     {
                         taskItem.TextColor = Color.Green;
                     }
-                    else if (taskItem.Date <= DateTime.Today)
+                    else if (taskItem.Date <= endOfToday)
                     {
                         taskItem.TextColor = Color.Red;
                     }

@@ -24,7 +24,7 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <ListView x:Name="listView" Margin="20" IsGroupingEnabled="True" GroupDisplayBinding="{Binding Key}" ItemsSource="{Binding GroupedTaskItems}">
+    <ListView x:Name="listView" Margin="20" IsGroupingEnabled="True" GroupDisplayBinding="{Binding Key}" ItemsSource="{Binding GroupedTaskItems}" SelectedItem="{Binding SelectedTaskItem}">
         <ListView.GroupHeaderTemplate>
             <DataTemplate>
                 <ViewCell>

@@ -33,7 +33,7 @@ namespace Team7Final.ViewModels
             {
                 if (SetProperty(ref _isToggleSwitchOn, value))
                 {
-                    _ = ToggleSwitch(value);
+                    _ = LoadItemsAsync(value);
                 }
             }
         }
@@ -76,10 +76,14 @@ namespace Team7Final.ViewModels
             _ = LoadItemsAsync();
         }
 
-        public async Task LoadItemsAsync()
+        public async Task LoadItemsAsync(bool value = true)
         {
             TaskItemDatabase database = await TaskItemDatabase.Instance;
             var items = await database.GetItemsAsync();
+
+            if (!value)
+                items = items.Cast<TaskItem>().Where(item => !item.Done).ToList();
+
             var groupedItems = items
                 .GroupBy(x => x.Date.Date)
                 .Select(group => new Grouping<DateTime, TaskItem>(group.Key, group))
@@ -116,6 +120,8 @@ namespace Team7Final.ViewModels
         {
             TaskItemDatabase database = await TaskItemDatabase.Instance;
             var items = await database.GetItemsAsync();
+            if (!value)
+                items = items.Cast<TaskItem>().Where(item => !item.Done).ToList();
             var groupedItems = items
                 .GroupBy(x => x.Date.Date)
                 .Select(group => new Grouping<DateTime, TaskItem>(group.Key, group))

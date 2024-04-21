@@ -10,9 +10,11 @@
     <ContentPage.Resources>
         <viewModel:TaskListViewModel x:Key="ViewModelInstance" />
     </ContentPage.Resources>
+    
     <ContentPage.BindingContext>
         <viewModel:TaskListViewModel />
     </ContentPage.BindingContext>
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="New Item" Command="{Binding AddTaskCommand}">
             <ToolbarItem.IconImageSource>
@@ -24,33 +26,41 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <ListView x:Name="listView" Margin="20" IsGroupingEnabled="True" GroupDisplayBinding="{Binding Key}" ItemsSource="{Binding GroupedTaskItems}" SelectedItem="{Binding SelectedTaskItem}">
-        <ListView.GroupHeaderTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <StackLayout BackgroundColor="{x:StaticResource lightGray1}">
-                        <Label Text="{Binding Key, StringFormat='{0:MMMM dd, yyyy - ddd}'}" FontAttributes="Bold" Margin="10"/>
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.GroupHeaderTemplate>
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <StackLayout Margin="30,0,0,0"
-                        Orientation="Horizontal"
-                        HorizontalOptions="FillAndExpand">
-                        <Label Text="{Binding Name}"
-                            HorizontalOptions="StartAndExpand"
-                            VerticalTextAlignment="Center"
-                            FontSize="25"
-                            TextColor="{Binding TextColor}">
-                        </Label>
-                        <CheckBox IsChecked="{Binding Done}" CheckedChanged="OnItemCheckChange" HorizontalOptions="End">
-                        </CheckBox>
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+    <StackLayout Margin="0,0,0,0" Padding="0,0,0,0">
+        <StackLayout Margin="0,15,0,0" Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+            <Label Text="Show Completed" />
+            <Switch IsToggled="{Binding IsToggleSwitchOn}" />
+        </StackLayout>
+        <ScrollView Margin="0,0,0,0" Padding="0,0,0,0">
+            <ListView x:Name="listView" Margin="20" IsGroupingEnabled="True" GroupDisplayBinding="{Binding Key}" ItemsSource="{Binding GroupedTaskItems}" SelectedItem="{Binding SelectedTaskItem}">
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout BackgroundColor="{x:StaticResource lightGray1}">
+                                <Label Text="{Binding Key, StringFormat='{0:MMMM dd, yyyy - ddd}'}" FontAttributes="Bold" Margin="10"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Margin="30,0,0,0"
+                                Orientation="Horizontal"
+                                HorizontalOptions="FillAndExpand">
+                                <Label Text="{Binding Name}"
+                                    HorizontalOptions="StartAndExpand"
+                                    VerticalTextAlignment="Center"
+                                    FontSize="25"
+                                    TextColor="{Binding TextColor}">
+                                </Label>
+                                <CheckBox IsChecked="{Binding Done}" CheckedChanged="OnItemCheckChange" HorizontalOptions="End">
+                                </CheckBox>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollView>
+    </StackLayout>
 </ContentPage>

@@ -73,15 +73,15 @@ namespace Team7Final.ViewModels
             {
                 await ItemCheckChanged(capturedSender, checkBox);
             });
-            _ = LoadItemsAsync();
+            _ = LoadItemsAsync(IsToggleSwitchOn);
         }
 
-        public async Task LoadItemsAsync(bool value = true)
+        public async Task LoadItemsAsync(bool showCompleted = true)
         {
             TaskItemDatabase database = await TaskItemDatabase.Instance;
             var items = await database.GetItemsAsync();
 
-            if (!value)
+            if (!showCompleted)
                 items = items.Cast<TaskItem>().Where(item => !item.Done).ToList();
 
             var groupedItems = items
@@ -108,12 +108,10 @@ namespace Team7Final.ViewModels
 
         private async Task SelectTask(TaskItem taskItem)
         {
-            await LoadItemsAsync();
             await Application.Current.MainPage.Navigation.PushAsync(new TaskItemPage
             {
                 BindingContext = new TaskItemViewModel(taskItem)
             });
-            await LoadItemsAsync();
         }
 
         private async Task ToggleSwitch(bool value)

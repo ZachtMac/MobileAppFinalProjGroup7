@@ -33,7 +33,7 @@ namespace Team7Final.ViewModels
             {
                 if (SetProperty(ref _isToggleSwitchOn, value))
                 {
-                    _ = ToggleSwitch(value);
+                    _ = LoadItemsAsync(value);
                 }
             }
         }
@@ -73,13 +73,17 @@ namespace Team7Final.ViewModels
             {
                 await ItemCheckChanged(capturedSender, checkBox);
             });
-            _ = LoadItemsAsync();
+            _ = LoadItemsAsync(IsToggleSwitchOn);
         }
 
-        public async Task LoadItemsAsync()
+        public async Task LoadItemsAsync(bool showCompleted = true)
         {
             TaskItemDatabase database = await TaskItemDatabase.Instance;
             var items = await database.GetItemsAsync();
+
+            if (!showCompleted)
+                items = items.Cast<TaskItem>().Where(item => !item.Done).ToList();
+
             var groupedItems = items
                 .GroupBy(x => x.Date.Date)
                 .Select(group => new Grouping<DateTime, TaskItem>(group.Key, group))
@@ -104,18 +108,18 @@ namespace Team7Final.ViewModels
 
         private async Task SelectTask(TaskItem taskItem)
         {
-            await LoadItemsAsync();
             await Application.Current.MainPage.Navigation.PushAsync(new TaskItemPage
             {
                 BindingContext = new TaskItemViewModel(taskItem)
             });
-            await LoadItemsAsync();
         }
 
         private async Task ToggleSwitch(bool value)
         {
             TaskItemDatabase database = await TaskItemDatabase.Instance;
             var items = await database.GetItemsAsync();
+            if (!value)
+                items = items.Cast<TaskItem>().Where(item => !item.Done).ToList();
             var groupedItems = items
                 .GroupBy(x => x.Date.Date)
                 .Select(group => new Grouping<DateTime, TaskItem>(group.Key, group))

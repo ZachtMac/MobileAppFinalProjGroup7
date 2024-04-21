@@ -28,7 +28,7 @@ namespace Team7Final.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            _ = _taskListViewModel.LoadItemsAsync();
+            _ = _taskListViewModel.LoadItemsAsync(_taskListViewModel.IsToggleSwitchOn);
         }
 
         public void OnItemCheckChange(object sender, CheckedChangedEventArgs e)
